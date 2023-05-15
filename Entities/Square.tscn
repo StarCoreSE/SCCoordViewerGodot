@@ -5,4 +5,5 @@
 [node name="Square" type="Node2D"]
 
 [node name="SquareMesh" type="MeshInstance2D" parent="."]
+scale = Vector2( 5, 5 )
 mesh = SubResource( 1 )
