@@ -2,7 +2,7 @@
 
 [sub_resource type="CubeMesh" id=1]
 
-[node name="square" type="Node2D"]
+[node name="Square" type="Node2D"]
 
 [node name="SquareMesh" type="MeshInstance2D" parent="."]
 mesh = SubResource( 1 )
