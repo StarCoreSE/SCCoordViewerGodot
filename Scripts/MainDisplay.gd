@@ -31,11 +31,16 @@ func _process(delta):
 				var coords = read_coordinates("res://" + file_name)
 				if coords != Vector2.ZERO:
 					var square = get_node(file_name.substr(0, file_name.length() - 4)) # Find the node with the same name as the file (without the .txt extension)
-					if square != null:
+					if square == null:
+						square = entity.instance() # Instantiate the Square scene
+						add_child(square) # Add the Square as a child of this Node2D
+						square.name = file_name.substr(0, file_name.length() - 4) # Set the name of the Square to the file name (without the .txt extension)
+					if square != null: # Check if node exists before updating position
 						square.position = coords # Update the position of the Square to the current coordinates
 			file_name = dir.get_next()
 		dir.list_dir_end()
 		timer = 1.0 # Reset the timer to 1 second
+
 
 func read_coordinates(file_path):
 	var coords = Vector2.ZERO # Set the initial coordinates to (0,0)
