@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scripts/MainDisplay.gd" type="Script" id=1]
 [ext_resource path="res://addons/carmel4a97.RTS_Camera2D/RTS-Camera2D.gd" type="Script" id=2]
+
+[sub_resource type="SphereMesh" id=1]
 
 [node name="Node2DMain" type="Node2D"]
 script = ExtResource( 1 )
@@ -10,9 +12,14 @@ script = ExtResource( 1 )
 current = true
 script = ExtResource( 2 )
 
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+modulate = Color( 0.184314, 0.184314, 0.184314, 1 )
+scale = Vector2( 20000, 20000 )
+z_index = -1
+mesh = SubResource( 1 )
+
 [node name="Label" type="Label" parent="."]
-margin_left = -10.0
-margin_top = -6.0
-margin_right = 10.0
-margin_bottom = 8.0
-text = "0,0"
+margin_right = 40.0
+margin_bottom = 14.0
+text = "aaaaaaaaaa"
+uppercase = true
