@@ -4,12 +4,12 @@ var entity = preload("res://Entities/Square.tscn") # Load the Square scene
 
 func _ready():
 	var dir = Directory.new()
-	dir.open("res://")
+	dir.open("./")
 	dir.list_dir_begin()
 	var file_name = dir.get_next()
 	while file_name != "":
 		if file_name.ends_with(".txt"):
-			var coords = read_coordinates("res://" + file_name)
+			var coords = read_coordinates("./" + file_name)
 			if coords != Vector2.ZERO:
 				var square = entity.instance() # Instantiate the Square scene
 				add_child(square) # Add the Square as a child of this Node2D
@@ -23,12 +23,12 @@ func _process(delta):
 	timer -= delta # Decrement the timer every frame
 	if timer <= 0.0:
 		var dir = Directory.new()
-		dir.open("res://")
+		dir.open("./")
 		dir.list_dir_begin()
 		var file_name = dir.get_next()
 		while file_name != "":
 			if file_name.ends_with(".txt"):
-				var coords = read_coordinates("res://" + file_name)
+				var coords = read_coordinates("./" + file_name)
 				if coords != Vector2.ZERO:
 					var square = get_node(file_name.substr(0, file_name.length() - 4)) # Find the node with the same name as the file (without the .txt extension)
 					if square == null:

@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=2]
-
-[ext_resource path="res://addons/carmel4a97.RTS_Camera2D/RTS-Camera2D.gd" type="Script" id=1]
-
-[node name="RTSCAM" type="Camera2D"]
-script = ExtResource( 1 )
