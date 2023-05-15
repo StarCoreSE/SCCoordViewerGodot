@@ -1,33 +1,23 @@
 extends Node2D
 
 var entity = preload("res://Entities/Square.tscn") # Load the Square scene
-var file_path = "" # Set the file path to an empty string initially
+var file_path = "res://coordinates.txt" # Set the file path to the text file
 var coords = Vector2.ZERO # Set the initial coordinates to (0,0)
 
 func _ready():
-	var files = Directory.new()
-	files.open("res://") # Open the resource directory
-	files.list_dir_begin() # Begin listing the files in the resource directory
-	while true:
-		var file_name = files.get_next() # Get the next file name
-		if file_name == "":
-			break # Stop if there are no more files
-		if file_name.get_extension() == "txt":
-			file_path = "res://" + file_name # Set the file path to the first .txt file found
-			break # Stop after finding the first .txt file
-	files.list_dir_end() # End listing the files in the resource directory
-
 	read_coordinates() # Read the initial coordinates from the text file
-	var square = entity.instance() # Instantiate the Square scene
-	add_child(square) # Add the Square as a child of this Node2D
-	square.position = coords # Set the position of the Square to the current coordinates
+	if coords != Vector2.ZERO: # Check if coordinates were successfully read
+		var square = entity.instance() # Instantiate the Square scene
+		add_child(square) # Add the Square as a child of this Node2D
+		square.position = coords # Set the position of the Square to the current coordinates
 
 var timer = 1.0 # Set the timer to 1 second
 func _process(delta):
 	timer -= delta # Decrement the timer every frame
 	if timer <= 0.0:
 		read_coordinates() # Read the latest coordinates from the text file
-		get_node("Square").position = coords # Update the position of the Square to the current coordinates
+		if coords != Vector2.ZERO: # Check if coordinates were successfully read
+			get_node("Square").position = coords # Update the position of the Square to the current coordinates
 		timer = 1.0 # Reset the timer to 1 second
 
 func read_coordinates():
@@ -36,7 +26,14 @@ func read_coordinates():
 		file.open(file_path, File.READ)
 		var line = file.get_line().strip_edges()
 		while line != "":
-			var temp = line.split(",")
-			coords = Vector2(float(temp[0]), float(temp[1]))
+			if line.find("position:") != -1: # Check if line contains "position:"
+				var x_pos = line.find("X=") + 2 # Find index of X coordinate
+				var y_pos = line.find("Y=") + 2 # Find index of Y coordinate
+				var comma_pos = line.find(",", y_pos) # Find index of comma after Y coordinate
+				var x_coord = float(line.substr(x_pos, y_pos - x_pos - 2)) # Extract X coordinate
+				var y_coord = float(line.substr(y_pos, comma_pos - y_pos)) # Extract Y coordinate
+				coords = Vector2(x_coord, y_coord) # Update coords
 			line = file.get_line().strip_edges()
 		file.close()
+	else:
+		coords = Vector2.ZERO # Set coords to (0,0) if file doesn't exist or can't be read
