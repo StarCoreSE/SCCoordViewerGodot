@@ -65,7 +65,8 @@ func read_coordinates(file_path):
 func spawnLabel(square, file_name, coords):
 	var label = Label.new()
 	label.name = "coordinate_label" # Assign a unique name to the label node
-	label.rect_min_size = Vector2(0, 40) # Set the size of the label
+	label.rect_min_size = Vector2(20, 20) # Set the size of the label (adjust the width and height as desired)
+	label.rect_scale = Vector2(5, 5)
 	label.align = Label.ALIGN_CENTER # Align the label to the center
 	label.valign = Label.VALIGN_BOTTOM # Align the label to the bottom
 	label.text = file_name.substr(0, file_name.length() - 4) + " - X: " + str(coords.x) + " Y: " + str(coords.y) # Set the label text
@@ -76,5 +77,6 @@ func updateLabel(square, file_name, coords):
 	var label = square.get_node("coordinate_label") # Get the label node by name
 	if label != null:
 		label.text = file_name.substr(0, file_name.length() - 4) + " - X: " + str(coords.x) + " Y: " + str(coords.y) # Update the label text
+		# Adjust the label's size (width and height) if needed
 
 

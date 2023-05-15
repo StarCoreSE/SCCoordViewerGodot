@@ -6,4 +6,5 @@
 
 [node name="SquareMesh" type="MeshInstance2D" parent="."]
 scale = Vector2( 20, 20 )
+z_index = 2
 mesh = SubResource( 1 )

@@ -1,16 +1,15 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scripts/MainDisplay.gd" type="Script" id=1]
 [ext_resource path="res://addons/carmel4a97.RTS_Camera2D/RTS-Camera2D.gd" type="Script" id=2]
+[ext_resource path="res://GridNode.tscn" type="PackedScene" id=3]
 
 [sub_resource type="SphereMesh" id=1]
 
+[sub_resource type="SphereMesh" id=2]
+
 [node name="Node2DMain" type="Node2D"]
 script = ExtResource( 1 )
-
-[node name="RTSCAM" type="Camera2D" parent="."]
-current = true
-script = ExtResource( 2 )
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="."]
 modulate = Color( 0.184314, 0.184314, 0.184314, 1 )
@@ -18,8 +17,21 @@ scale = Vector2( 20000, 20000 )
 z_index = -1
 mesh = SubResource( 1 )
 
+[node name="MeshInstance2D2" type="MeshInstance2D" parent="."]
+modulate = Color( 0.192157, 0.329412, 0.164706, 1 )
+scale = Vector2( 50, 50 )
+z_index = 1
+mesh = SubResource( 2 )
+
 [node name="Label" type="Label" parent="."]
-margin_right = 40.0
-margin_bottom = 14.0
-text = "aaaaaaaaaa"
-uppercase = true
+margin_left = -20.0
+margin_top = -13.0
+margin_bottom = 1.0
+rect_scale = Vector2( 2, 2 )
+text = "0,0"
+
+[node name="RTSCAM" type="Camera2D" parent="."]
+current = true
+script = ExtResource( 2 )
+
+[node name="GridNode" parent="." instance=ExtResource( 3 )]
