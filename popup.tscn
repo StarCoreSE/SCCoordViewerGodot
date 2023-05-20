@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scripts/ams.gd" type="Script" id=1]
+
+[node name="ams" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -508.0
+margin_top = -278.0
+margin_right = -508.0
+margin_bottom = -278.0
+script = ExtResource( 1 )
+
+[node name="btn_select" type="Button" parent="."]
+margin_right = 117.0
+margin_bottom = 56.0
+text = "SELECT"
+
+[node name="FileDialog" type="FileDialog" parent="."]
+visible = true
+margin_left = 252.0
+margin_top = 16.0
+margin_right = 775.0
+margin_bottom = 431.0
+window_title = "Open SE world's mod storage folder!"
+resizable = true
+mode = 2
+access = 2
+show_hidden_files = true
+
+[connection signal="pressed" from="btn_select" to="." method="_on_btn_select_pressed"]
+[connection signal="file_selected" from="FileDialog" to="." method="_on_FileDialog_file_selected"]

@@ -69,14 +69,19 @@ func spawnLabel(square, file_name, coords):
 	label.rect_scale = Vector2(5, 5)
 	label.align = Label.ALIGN_CENTER # Align the label to the center
 	label.valign = Label.VALIGN_BOTTOM # Align the label to the bottom
-	label.text = file_name.substr(0, file_name.length() - 4) + " - X: " + str(coords.x) + " Y: " + str(coords.y) # Set the label text
+	
+	# Sanitize the file_name by removing special characters and replacing them with alternatives
+	var sanitized_name = file_name.gsub("[^a-zA-Z0-9_]+", "_")
+	label.text = sanitized_name.substr(0, sanitized_name.length() - 4) + " - X: " + str(coords.x) + " Y: " + str(coords.y) # Set the label text
 	square.add_child(label) # Add the label as a child of the square
 
 
 func updateLabel(square, file_name, coords):
+	# Sanitize the file_name to match the sanitized label name
+	var sanitized_name = file_name.gsub("[^a-zA-Z0-9_]+", "_")
 	var label = square.get_node("coordinate_label") # Get the label node by name
 	if label != null:
-		label.text = file_name.substr(0, file_name.length() - 4) + " - X: " + str(coords.x) + " Y: " + str(coords.y) # Update the label text
+		label.text = sanitized_name.substr(0, sanitized_name.length() - 4) + " - X: " + str(coords.x) + " Y: " + str(coords.y) # Update the label text
 		# Adjust the label's size (width and height) if needed
 
 
